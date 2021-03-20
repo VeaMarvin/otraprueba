@@ -42,6 +42,25 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6 text-center">
+                                <h3>
+                                    Forma de pago: {{ $order->type_payment }}
+                                    @if (!is_null($tipo_credito))
+                                        ({{ $tipo_credito->getCreditConcatAttribute() }})
+                                    @endif
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                @if ($order->sold)
+                                    <button type="button" class="btn btn-block btn-success"><h1><strong>PAGADO</strong></h1></button>
+                                @else
+                                    <button type="button" class="btn btn-block btn-danger"><h1><strong>NO PAGADO</strong></h1></button>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12"><br><br></div>
                             <div class="col-md-12">
                                 <div class="table-responsive">

@@ -52,6 +52,8 @@
                                     <th class="text-center">{{ __('Teléfono') }}</th>
                                     <th class="text-center">{{ __('Total') }}</th>
                                     <th class="text-center">{{ __('Fecha') }}</th>
+                                    <th class="text-center">{{ __('Forma de Pago') }}</th>
+                                    <th class="text-center">{{ __('Pagado') }}</th>
                                     <th class="text-center">{{ __('Opciones') }}</th>
                                 </thead>
                                 <tbody>
@@ -63,6 +65,14 @@
                                             <td class="text-center">{{ $item->phone }}</td>
                                             <td class="text-right">{{ $item->getStringTotalAttribute() }}</td>
                                             <td class="text-center">{{ $item->getStringFechaAttribute() }}</td>
+                                            <td class="text-center">{{ $item->type_payment }}</td>
+                                            <td class="text-center">
+                                                @if ($item->sold)
+                                                    <button type="button" class="btn btn-block btn-success"><strong>PAGADO</strong></button>
+                                                @else
+                                                    <button type="button" class="btn btn-block btn-danger"><strong>NO PAGADO</strong></button>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 <a rel="tooltip" class="btn btn-primary btn-sm btn-round" href="{{ route('order.show', $item) }}" data-toggle="tooltip" data-placement="top" title="Ver detalle del pedido">
                                                     <i class="material-icons">speaker_notes</i>

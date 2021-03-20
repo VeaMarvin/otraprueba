@@ -15,7 +15,7 @@
         </div>
     </a>
   </div>
-  <div class="sidebar-wrapper">
+  <div class="sidebar-wrapper ps-container ps-theme-default">
     <ul class="nav">
       <li class="nav-item {{URL::current() == URL::route('sistema.home') ? 'active' : ''}}">
         <a class="nav-link" href="{{ route('sistema.home') }}">
@@ -23,17 +23,43 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
-      <li class="nav-item {{URL::current() == URL::route('brand.index') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('brand.index') }}">
-          <i class="material-icons">bookmark</i>
-            <p>{{ __('Marcas') }}</p>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#catalogos" aria-expanded="true">
+            <p>Catálogos<b class="caret"></b></p>
         </a>
+        <div class="collapse" id="catalogos">
+            <ul class="nav">
+                <li class="nav-item {{URL::current() == URL::route('brand.index') ? 'active' : ''}}">
+                  <a class="nav-link" href="{{ route('brand.index') }}">
+                    <span class="sidebar-normal"> <i class="material-icons">bookmark</i> {{ __('Marcas') }} </span>
+                  </a>
+                </li>
+                <li class="nav-item {{URL::current() == URL::route('category.index') ? 'active' : ''}}">
+                  <a class="nav-link" href="{{ route('category.index') }}">
+                    <span class="sidebar-normal"> <i class="material-icons">drag_indicator</i> {{ __('Categoría') }} </span>
+                  </a>
+                </li>
+            </ul>
+        </div>
       </li>
-      <li class="nav-item {{URL::current() == URL::route('category.index') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('category.index') }}">
-          <i class="material-icons">drag_indicator</i>
-            <p>{{ __('Categoría') }}</p>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#credits" aria-expanded="true">
+            <p>Configuración<b class="caret"></b></p>
         </a>
+        <div class="collapse" id="credits">
+            <ul class="nav">
+                <li class="nav-item {{URL::current() == URL::route('credit.index') ? 'active' : ''}}">
+                  <a class="nav-link" href="{{ route('credit.index') }}">
+                    <span class="sidebar-normal"> <i class="material-icons">card_giftcard</i> {{ __('Crédito') }} </span>
+                  </a>
+                </li>
+                <li class="nav-item {{URL::current() == URL::route('credit.history') ? 'active' : ''}}">
+                  <a class="nav-link" href="{{ route('credit.history') }}">
+                    <span class="sidebar-normal"> <i class="material-icons">description</i> {{ __('Historial de créditos') }} </span>
+                  </a>
+                </li>
+            </ul>
+        </div>
       </li>
       <li class="nav-item {{URL::current() == URL::route('product.index') ? 'active' : ''}}">
         <a class="nav-link" href="{{ route('product.index') }}">
@@ -53,17 +79,50 @@
             <p>{{ __('Usuarios') }}</p>
         </a>
       </li>
-      <li class="nav-item {{URL::current() == URL::route('company.index_pagina') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('company.index_pagina') }}">
-          <i class="material-icons">phonelink</i>
-            <p>{{ __('Página WEB') }}</p>
+      @if (Auth::user()->admin)
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#reportes" aria-expanded="true">
+                <p>Reportes<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="reportes">
+                <ul class="nav">
+                    <li class="nav-item {{URL::current() == URL::route('report.traicing') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{ route('report.traicing') }}">
+                        <span class="sidebar-normal"> <i class="material-icons">insert_drive_file</i> {{ __('Información de pedido') }} </span>
+                    </a>
+                    </li>
+                    <li class="nav-item {{URL::current() == URL::route('report.credit') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{ route('report.credit') }}">
+                        <span class="sidebar-normal"> <i class="material-icons">insert_drive_file</i> {{ __('Crédito por pagar') }} </span>
+                    </a>
+                    </li>
+                    <li class="nav-item {{URL::current() == URL::route('report.client') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{ route('report.client') }}">
+                        <span class="sidebar-normal"> <i class="material-icons">insert_drive_file</i> {{ __('Información del cliente') }} </span>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+      @endif
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#systems" aria-expanded="true">
+            <p>Configuración<b class="caret"></b></p>
         </a>
-      </li>
-      <li class="nav-item {{URL::current() == URL::route('company.index_sistema') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('company.index_sistema') }}">
-          <i class="material-icons">phonelink</i>
-            <p>{{ __('Sistema WEB') }}</p>
-        </a>
+        <div class="collapse" id="systems">
+            <ul class="nav">
+                <li class="nav-item {{URL::current() == URL::route('company.index_sistema') ? 'active' : ''}}">
+                  <a class="nav-link" href="{{ route('company.index_sistema') }}">
+                    <span class="sidebar-normal"> <i class="material-icons">phonelink</i> {{ __('Sistema WEB') }} </span>
+                  </a>
+                </li>
+                <li class="nav-item {{URL::current() == URL::route('company.index_pagina') ? 'active' : ''}}">
+                  <a class="nav-link" href="{{ route('company.index_pagina') }}">
+                    <span class="sidebar-normal"> <i class="material-icons">phonelink</i> {{ __('Página WEB') }} </span>
+                  </a>
+                </li>
+            </ul>
+        </div>
       </li>
     </ul>
   </div>

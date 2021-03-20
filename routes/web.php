@@ -73,7 +73,6 @@ Route::group(['middleware' => ['auth','system']], function () {
         Route::get('order', 'OrderController@index')->name('index');
         Route::get('order/{order}/detail', 'OrderController@show')->name('show');
         Route::get('order/update/{order}', 'OrderController@update')->name('update');
-        Route::delete('order/delete/{order}', 'OrderController@delete')->name('delete');
     });
 
     Route::name('user.')->group(function () {
@@ -94,6 +93,35 @@ Route::group(['middleware' => ['auth','system']], function () {
         Route::put('company/direction/{company}', 'CompanyController@direction_store')->name('direction_store');
         Route::delete('company/phone_delete/{phone}', 'CompanyController@phone_delete')->name('phone_delete');
         Route::delete('company/direction_delete/{direction}', 'CompanyController@direction_delete')->name('direction_delete');
+    });
+
+    Route::name('credit.')->group(function () {
+        Route::get('credit', 'CreditController@index')->name('index');
+        Route::get('credit/history', 'CreditController@history')->name('history');
+        Route::put('credit/update/{credit}', 'CreditController@update')->name('update');
+    });
+});
+
+
+Route::group(['middleware' => ['auth','admin']], function () {
+    Route::name('order.')->group(function () {
+        Route::delete('order/delete/{order}', 'OrderController@delete')->name('delete');
+    });
+
+    Route::name('credit.')->group(function () {
+        Route::delete('credit/delete/{credit}', 'CreditController@destroy')->name('delete');
+    });
+
+    Route::name('report.')->group(function () {
+        Route::get('report/traicing', 'ReportController@traicing')->name('traicing');
+        Route::get('report/credit', 'ReportController@credit')->name('credit');
+        Route::get('report/client', 'ReportController@client')->name('client');
+    });
+
+    Route::name('pdf.')->group(function () {
+        Route::get('pdf/traicing/{month}', 'PDFController@traicing')->name('traicing');
+        Route::get('pdf/credit/{date_start}/{date_end}', 'PDFController@credit')->name('credit');
+        Route::get('pdf/client/{user_id}', 'PDFController@client')->name('client');
     });
 });
 

@@ -111,7 +111,7 @@ class ProductController extends Controller
     //Vista de la pantalla del producto seleccionado
     public function show(Product $product)
     {
-        $images = Image::where('product_id',$product->id)->orderBy('id','desc')->paginate(1);
+        $images = Image::where('product_id',$product->id)->orderBy('id','desc')->paginate(12);
         return view('system.product.show',compact('product','images'));
     }
 

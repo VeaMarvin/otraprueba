@@ -2,13 +2,33 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SearchableTrait;
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'name' => 10
+        ]
+    ];
 
     /**
      * The table associated with the model.
@@ -29,7 +49,8 @@ class User extends Authenticatable
         'nickname',
         'avatar',
         'current',
-        'system'
+        'system',
+        'admin'
     ];
 
     /**
@@ -89,5 +110,15 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function credits()
+    {
+        return $this->hasMany(Credit::class);
+    }
+
+    public function request_credits()
+    {
+        return $this->hasMany(RequestCredit::class);
     }
 }

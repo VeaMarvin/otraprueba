@@ -3,15 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
-class Image extends Model
+class DiscountRate extends Model
 {
+    use SearchableTrait;
+
+    //Constantes
+    const DIA = 'DIAS';
+    const MES = 'MESES';
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'images';
+    protected $table = 'discount_rates';
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +26,8 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'photo',
-        'product_id'
+        'quantity',
+        'day_month'
     ];
 
     /**
@@ -34,8 +41,8 @@ class Image extends Model
     ];
 
     //Mutadores
-    public function setPhotoAttribute($value)
+    public function getNameAttribute()
     {
-        $this->attributes['photo'] = "data:image/jpg;base64,{$value}";
+        return "{$this->quantity} - {$this->day_month}";
     }
 }

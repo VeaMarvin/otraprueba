@@ -51,6 +51,7 @@ class CompanyController extends Controller
         else
             $this->validate($request, $this->rules(), $this->messages());
 
+        $company->nit = $request->nit;
         $company->name = $request->name;
         $company->slogan = $request->slogan;
         $company->vision = $request->vision;
@@ -167,6 +168,7 @@ class CompanyController extends Controller
         {
             return [
                 'redireccionar'=>'required|starts_with:index_pagina,index_sistema',
+                'nit'=>'required|max:10|unique:business,nit',
                 'name'=>'required|max:50',
                 'slogan'=>'required|max:5',
                 'vision'=>'required|max:1000',
@@ -184,6 +186,7 @@ class CompanyController extends Controller
         {
             return [
                 'redireccionar'=>'required|starts_with:index_pagina,index_sistema',
+                'nit'=>'required|max:10|unique:business,nit,'.$id,
                 'name'=>'required|max:50',
                 'slogan'=>'required|max:5',
                 'vision'=>'required|max:1000',
@@ -204,6 +207,10 @@ class CompanyController extends Controller
         return [
             'redireccionar.required' => 'El parámetro de redireccionamiento es obligatorio.',
             'redireccionar.starts_with' => 'El parámetro de redireccionamiento solo pueder ser index_pagina o index_sistema.',
+
+            'nit.required' => 'El nit es obligatorio.',
+            'nit.max'  => 'El nit debe tener menos de :max caracteres.',
+            'nit.unique'  => 'El nit ingresado ya existe en registrado en el sistema.',
 
             'name.required' => 'El nombre de la empresa es obligatorio.',
             'name.max'  => 'El nombre de la empresa debe tener menos de :max caracteres.',

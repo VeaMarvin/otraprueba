@@ -49,6 +49,16 @@
                                         </div>
                                         <div class="col-sm-12 col-md-8">
                                             <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group{{ $errors->has('nit') ? ' has-danger' : '' }}">
+                                                    <input class="form-control{{ $errors->has('nit') ? ' is-invalid' : '' }}"
+                                                    name="nit" id="input-nit" type="text" placeholder="{{ __('nit de la empresa') }}"
+                                                    value="{{ old('nit',$web->nit) }}" aria-required="true"/>
+                                                    @if ($errors->has('nit'))
+                                                        <span id="nit-error" class="error text-danger" for="input-nit">{{ $errors->first('nit') }}</span>
+                                                    @endif
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-12 col-md-9">
                                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                                     <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"

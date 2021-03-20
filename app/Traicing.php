@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Traicing extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'images';
+    protected $table = 'traicings';
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +19,9 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'photo',
-        'product_id'
+        'status',
+        'order_id',
+        'user_id'
     ];
 
     /**
@@ -34,8 +35,19 @@ class Image extends Model
     ];
 
     //Mutadores
-    public function setPhotoAttribute($value)
+    public function getUserAttribute()
     {
-        $this->attributes['photo'] = "data:image/jpg;base64,{$value}";
+        return User::find($this->user_id)->name;
+    }
+
+    public function getDateAttribute()
+    {
+        return date('d/m/Y h:i:s', strtotime($this->created_at));
+    }
+
+    //Relaciones
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
